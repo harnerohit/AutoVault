@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: autovault-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python build.py
+    startCommand: gunicorn src.app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.10.12"
+      - key: FLASK_ENV
+        value: production
+      - key: FRONTEND_URL
+        value: "https://your-app.vercel.app"  # UPDATE after Vercel deploy
+
